@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aggregator-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aggregator
+  template:
+    metadata:
+      labels:
+        app: aggregator
+    spec:
+      containers:
+        - name: aggregator
+          image: wassimkha/aggregator-service:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aggregator-srv
+spec:
+  selector:
+    app: aggregator
+  ports:
+    - name: aggregator
+      protocol: TCP
+      port: 4000
+      targetPort: 4000

@@ -1,5 +1,4 @@
-twitter bot that will scrape the bio of the users and look for specific keywords, will then store the relevant users
-in a mongo db database. 
+Twitter bot that will scrape the bio of Twitter users and look for specific keywords will then store the relevant users in a MongoDB database, will then recursively add the users following into another table to fetch them later. 
 
 to run the project:
 1. Build the images

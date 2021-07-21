@@ -35,12 +35,14 @@ let taskRunning = false
 start().then(async () => {
     // Schedule tasks to be run on the server.
     console.log(`server started`)
-    cron.schedule('*/5 * * * *', async function() {
+    cron.schedule('*/3 * * * *', async function() {
         if (taskRunning) {
             return
         }
         taskRunning = true
-        const twitter_user = await Twitter_User.findOne({visited: false});
+        const twitter_user = await Twitter_User
+            .findOne({visited: false})
+            .sort({followers_count: -1});
         if (twitter_user) {
             twitter_user.visited = true;
             const users = await fetch_users(twitter_user.twitter_id).catch(e => console.log(e))

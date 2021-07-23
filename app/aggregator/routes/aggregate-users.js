@@ -2,7 +2,16 @@ const express = require('express');
 const {axios_instance} = require("../axios/internal-requests");
 const router = express.Router();
 
-router.get('/aggregate-users', async (req, res) => {
+
+/**
+ * Route serving to fetch all the users in our database.
+ * @name get/aggregate-users
+ * @function
+ * @inner
+ * @param {mongo_params} the filter params ran directly again the mongoDB database
+ * @param {page} the current page (the # of users to skip)
+ */
+router.post('/aggregate-users', async (req, res) => {
     console.log("agggregate users")
     let params = {}
     let page = 0;

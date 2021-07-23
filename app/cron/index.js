@@ -33,23 +33,25 @@ const start = async () => {
 
 let taskRunning = false
 start().then(async () => {
-    // Schedule tasks to be run on the server.
+    // Schedule tasks to be run on the server every 3 mins.
     console.log(`server started`)
     cron.schedule('*/3 * * * *', async function() {
-        if (taskRunning) {
+        if (taskRunning) { //making sure the task has finished running before running the next one
             return
         }
         taskRunning = true
+
         const twitter_user = await Twitter_User
             .findOne({visited: false})
             .sort({followers_count: -1});
+
         if (twitter_user) {
             twitter_user.visited = true;
             const users = await fetch_users(twitter_user.twitter_id).catch(e => console.log(e))
             if (users.length > 0) {
                 await new Promise(resolve => {
                     Twitter_User.collection.insertMany(users, {ordered: false}, function (err,result) {
-                        resolve(result);    // Otherwise resolve
+                        resolve(result);    //insert all the users the current twitter profile is following
 
                     });
                 });

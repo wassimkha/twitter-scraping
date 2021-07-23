@@ -4,6 +4,15 @@ const Twitter_User = require('../model/twitter-user')
 
 const router = express.Router();
 
+
+/**
+ * Route serving to fetch all the users in our database.
+ * @name get/getters
+ * @function
+ * @inner
+ * @param {mongo_params} the filter params ran directly again the mongoDB database
+ * @param {page} the current page (the # of users to skip)
+ */
 router.get('/getters', async (req, res) => {
     console.log(`getting users`)
     let params = {}
@@ -19,7 +28,7 @@ router.get('/getters', async (req, res) => {
     console.log(`params ${params} and skip ${skip}`)
     let users = []
     try {
-        users = await Twitter_User.find(params).skip(skip).limit(20)
+        users = await Twitter_User.find(params).skip(skip)
     } catch (e) {
         console.log(e)
     }

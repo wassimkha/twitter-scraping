@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cron-depl
+  name: client-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cron
+      app: client
   template:
     metadata:
       labels:
-        app: cron
+        app: client
     spec:
       containers:
-        - name: cron
-          image: <docker-id>/cron-service:latest
-
+        - name: client
+          image: <docker-id>/twitter-client:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cron-srv
+  name: client-svc
 spec:
   selector:
-    app: cron
+    app: client
   ports:
-    - name: cron
+    - name: client
       protocol: TCP
       port: 3000
       targetPort: 3000
+

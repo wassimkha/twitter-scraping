@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: aggregator
-          image: wassimkha/aggregator-service:latest
+          image: <docker-id>/aggregator-service:latest
 
 ---
 apiVersion: v1

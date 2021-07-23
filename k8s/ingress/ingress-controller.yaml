@@ -17,6 +17,10 @@ spec:
             backend:
               serviceName: aggregator-srv
               servicePort: 4000
+          - path: /?(.*)
+            backend:
+              serviceName: client-svc
+              servicePort: 3000
 ---
 apiVersion: v1
 kind: Service

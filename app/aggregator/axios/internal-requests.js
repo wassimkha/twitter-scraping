@@ -1,13 +1,12 @@
 const axios = require('axios');
 
+/**
+ * returns the axios object used to send request to the other services
+ * @returns {AxiosInstance}
+ */
 const send_internal_request =  () => {
-    // return axios.create({
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //         },
-    //     })
     return axios.create({
-        baseURL: 'http://174.138.115.186',
+        baseURL: 'http://<url>',
         headers: {
             'Content-Type': 'application/json'
         },
